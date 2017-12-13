@@ -7,6 +7,7 @@ data_val = pd.read_csv('test.csv')
 #creating a deep copy
 data1 = data_raw.copy(deep=True)
 #however passing by reference is convenient, because we can clean both datasets at once
+#here basically concatenating the train and test dataset
 data_cleaner = [data1, data_val]
 
 #preview data
@@ -14,5 +15,47 @@ data_cleaner = [data1, data_val]
 # print(data_raw.head())
 # data_raw.tail()
 # print(data_raw.sample(10))
+
+# print('Train columns with null values:\n', data1.isnull().sum())
+# print("-"*10)
+#
+# print('Test/Validation columns with null values:\n', data_val.isnull().sum())
+# print("-"*10)
+#
+# data_raw.describe(include = 'all')
+
+
+
+#DATA CLEANING
+
+#STEP1 CORRECTING that is here manualy values checked not required in this case
+
+#STEP2 COMPLETING filling the none values
+for dataset in data_cleaner:
+    dataset['Age'].fillna(value=dataset['Age'].median(), inplace=True)
+    # complete embarked with mode
+    dataset['Embarked'].fillna(dataset['Embarked'].mode()[0], inplace=True)
+
+    # complete missing age with median
+    dataset['Fare'].fillna(dataset['Fare'].median(), inplace=True)
+
+#delete the cabin feature/column and others previously stated to exclude in train dataset
+drop_column = ['PassengerId','Cabin', 'Ticket']
+
+data1.drop(drop_column, axis=1 , inplace=True)
+
+#to check if data contains any null values or not
+# print(data1.isnull().sum())
+# print(data_val.isnull().sum())
+
+#STEP3 CREATE: Feature Engineering for train and test/validation dataset
+for dataset in data_cleaner:
+    dataset['FamilySize'] = dataset['SibSp'] + dataset['Parch'] + 1
+    dataset['IsAlone'] = 1
+    dataset['IsAlone'].loc[dataset['FamilySize']>1] = 0
+
+
+
+
 
 
