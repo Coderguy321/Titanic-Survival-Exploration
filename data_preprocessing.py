@@ -54,6 +54,31 @@ for dataset in data_cleaner:
     dataset['IsAlone'] = 1
     dataset['IsAlone'].loc[dataset['FamilySize']>1] = 0
 
+    dataset['Title'] = dataset['Name'].str.split(',', expand=True)[1].str.split('.', expand=True)[0]
+
+    # Continuous variable bins; qcut vs cut: https://stackoverflow.com/questions/30211923/what-is-the-difference-between-pandas-qcut-and-pandas-cut
+    dataset['FareBin'] = pd.qcut(dataset['Fare'], 4)
+
+    # Age Bins/Buckets using cut or value bins: https://pandas.pydata.org/pandas-docs/stable/generated/pandas.cut.html
+    dataset['AgeBin'] = pd.cut(dataset['Age'].astype(int), 5)
+
+    # print(dataset['AgeBin'].head().value_counts())
+
+#CLEANING TITLE NAMES
+start_min = 10
+title_names = (data1['Title'].value_counts() < start_min)
+
+# apply and lambda functions are quick and dirty code to find and replace with fewer lines of code:
+# https://community.modeanalytics.com/python/tutorial/pandas-groupby-and-python-lambda-functions/
+data1['Title'] = data1['Title'].apply(lambda x: 'Misc' if title_names.loc[x] == True else x)
+
+# preview data again
+# data1.info()
+# data_val.info()
+# print(data1.sample(10))
+
+
+
 
 
 
