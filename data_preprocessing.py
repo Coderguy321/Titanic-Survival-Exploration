@@ -78,6 +78,8 @@ data1['Title'] = data1['Title'].apply(lambda x: 'Misc' if title_names.loc[x] == 
 # data_val.info()
 # print(data1.sample(10))
 
+
+
 # print(data1.sample(1))
 #STEP 4 CONVERTING THE ENGLISH KEYWORDS TO MATHEMATICAL INPUTS
 label = LabelEncoder()
@@ -98,7 +100,7 @@ data1_x = ['Sex','Pclass', 'Embarked', 'Title','SibSp', 'Parch', 'Age', 'Fare',
 data1_x_calc = ['Sex_Code','Pclass', 'Embarked_Code', 'Title_Code','SibSp', 'Parch', 'Age', 'Fare'] #coded for algorithm calculation
 data1_xy = Target + data1_x
 
-#define x variables for original w/bin features to remove continuous variables
+# define x variables for original w/bin features to remove continuous variables
 data1_x_bin = ['Sex_Code','Pclass', 'Embarked_Code', 'Title_Code', 'FamilySize', 'AgeBin_Code', 'FareBin_Code']
 data1_xy_bin = Target + data1_x_bin
 # print('Bin X Y: ', data1_xy_bin, '\n')
@@ -107,13 +109,18 @@ data1_xy_bin = Target + data1_x_bin
 data1_dummy = pd.get_dummies(data1[data1_x])
 # print(data1_dummy.sample(5))
 data1_x_dummy = data1_dummy.columns.tolist()
-print(data1_x_dummy)
 data1_xy_dummy = Target + data1_x_dummy
 # print('Dummy X Y: ', data1_xy_dummy, '\n')
 
 
 
-# print(data1_dummy.head())
+#AFTER THIS DATA CLEANING PART IS OVER, DOUBLE CHECKING THE DATA AFTER THE CLEANING
+
+print('Training data \n', data1.isnull().sum())
+print('-'*20)
+print(data1.info())
+print('---'*20)
+
 
 
 
