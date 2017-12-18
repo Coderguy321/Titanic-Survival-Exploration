@@ -115,11 +115,20 @@ data1_xy_dummy = Target + data1_x_dummy
 
 
 #AFTER THIS DATA CLEANING PART IS OVER, DOUBLE CHECKING THE DATA AFTER THE CLEANING
+# print('Training data \n', data1.isnull().sum())
+# print('-'*20)
+# print(data1.info())
+# print('---'*20)
+#
 
-print('Training data \n', data1.isnull().sum())
-print('-'*20)
-print(data1.info())
-print('---'*20)
+
+
+
+
+
+
+
+
 
 
 
