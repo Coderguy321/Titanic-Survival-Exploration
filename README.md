@@ -2,7 +2,7 @@
 Machine Learning from Disaster competition. Data munging, analysis, and visualisation techniques.
 
 Data
-The dataset used in this project is included as titanic_data.csv. This dataset is provided by Udacity and contains the following attributes:
+The dataset used in this project is included as titanic_data.csv.
 
 Features
 
