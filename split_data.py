@@ -19,3 +19,5 @@ for x in data1_x:
     if data1[x].dtype != 'float64':
         print(data1[[x, Target[0]]].groupby(x, as_index=False).mean())
         print('-'*40)
+
+#CROSS TAB  USED TO PRINT RELATION BETWEEN OUTPUT AND THE DIFFERENT COLUMNS
